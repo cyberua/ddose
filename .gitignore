@@ -1,0 +1,8 @@
+coverage.*
+report.xml
+network-log.*
+bin/
+obj/
+usage.json
+tools/plots/*.html
+tools/plots/*.svg

@@ -1,0 +1,29 @@
+stages:
+  - test
+
+go-vet:
+  image: dbogatov/docker-sources:golang--1.17-alpine-multi-arch
+  variables:
+    CGO_ENABLED: 0
+  stage: test
+  script:
+    - go vet ./main/
+  tags:
+    - docker
+
+simple-run:
+  image: dbogatov/docker-sources:golang--1.17-alpine-multi-arch
+  stage: test
+  script:
+    - go run ./main/ -h
+  tags:
+    - docker
+
+include:
+  template: Dependency-Scanning.gitlab-ci.yml
+
+dependency_scanning:
+  variables:
+    DS_DISABLE_DIND: "true"
+  tags:
+    - docker
